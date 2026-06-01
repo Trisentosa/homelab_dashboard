@@ -2,6 +2,8 @@ services:
   dashboard:
     build:
       context: .
+      security_opt:
+        - apparmor:unconfined
     security_opt:
       - apparmor:unconfined
     image: homelab-dashboard:latest
