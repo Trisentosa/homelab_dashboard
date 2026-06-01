@@ -12,6 +12,7 @@ const STATUS_OPTIONS: { value: ServiceStatus; label: string }[] = [
 type FormData = {
   name: string;
   url: string;
+  local_url: string;
   description: string;
   summary: string;
   category: string;
@@ -22,6 +23,7 @@ type FormData = {
 const EMPTY: FormData = {
   name: "",
   url: "",
+  local_url: "",
   description: "",
   summary: "",
   category: "",
@@ -45,6 +47,7 @@ export default function ServiceForm({ service, onSave, onClose }: ServiceFormPro
       setForm({
         name: service.name,
         url: service.url,
+        local_url: service.local_url ?? "",
         description: service.description ?? "",
         summary: service.summary ?? "",
         category: service.category,
@@ -117,6 +120,10 @@ export default function ServiceForm({ service, onSave, onClose }: ServiceFormPro
             <div className="col-span-2">
               <label className={labelClass}>URL *</label>
               <input className={inputClass} value={form.url} onChange={(e) => set("url", e.target.value)} placeholder="https://cloud.home.lab" />
+            </div>
+            <div className="col-span-2">
+              <label className={labelClass}>Local URL</label>
+              <input className={inputClass} value={form.local_url} onChange={(e) => set("local_url", e.target.value)} placeholder="http://192.168.1.10:8080" />
             </div>
             <div>
               <label className={labelClass}>Category *</label>

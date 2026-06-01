@@ -126,18 +126,35 @@ export default function ServiceModal({ service, onClose }: ServiceModalProps) {
 
         {/* Footer */}
         <div className="p-6 border-t border-[var(--color-border)]">
-          <a
-            href={service.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full py-3 px-6 rounded-xl font-semibold text-white bg-[var(--color-accent)] hover:opacity-90 transition-opacity"
-            onClick={onClose}
-          >
-            <span>Enter</span>
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
+          <div className="flex gap-2">
+            <a
+              href={service.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-semibold text-white bg-[var(--color-accent)] hover:opacity-90 transition-opacity ${service.local_url ? "flex-[3]" : "w-full"}`}
+              onClick={onClose}
+            >
+              <span>Enter</span>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            {service.local_url && (
+              <a
+                href={service.local_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-[1] flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl font-semibold text-[var(--color-text-muted)] bg-[var(--color-surface-3)] border border-[var(--color-border)] hover:text-[var(--color-text)] hover:border-[var(--color-accent)] transition-colors text-sm"
+                onClick={onClose}
+                title="Open local URL"
+              >
+                <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span>Local</span>
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>

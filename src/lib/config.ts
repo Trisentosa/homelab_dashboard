@@ -8,6 +8,7 @@ export interface Service {
   id: string;
   name: string;
   url: string;
+  local_url?: string;
   description: string;
   summary?: string;
   category: string;

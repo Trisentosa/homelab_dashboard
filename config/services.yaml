@@ -4,6 +4,7 @@ services:
   - id: nextcloud
     name: Nextcloud
     url: https://cloud.home.lab
+    local_url: http://0.0.0.0:80
     description: Personal cloud storage and file sync
     summary: |
       ## Nextcloud
