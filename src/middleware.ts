@@ -4,7 +4,7 @@ import { SessionData, sessionOptions } from "@/lib/auth";
 
 const PUBLIC_PATHS = ["/login", "/api/auth", "/api/health"];
 
-export async function proxy(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (PUBLIC_PATHS.some((p) => pathname.startsWith(p))) {
