@@ -1,0 +1,103 @@
+title: "My Homelab"
+
+services:
+  - id: nextcloud
+    name: Nextcloud
+    url: https://cloud.home.lab
+    description: Personal cloud storage and file sync
+    summary: |
+      ## Nextcloud
+
+      Self-hosted file sync and share platform. Access your files from anywhere.
+
+      **Features:**
+      - WebDAV, CalDAV, CardDAV support
+      - Mobile apps for iOS and Android
+      - Document collaboration with Nextcloud Office
+    category: Storage
+    icon: nextcloud
+    status: operating
+
+  - id: adguard-home
+    name: AdGuard Home
+    url: http://192.168.1.10:3000
+    description: Network-wide DNS ad blocker
+    summary: |
+      ## AdGuard Home
+
+      DNS sinkhole that blocks ads, trackers, and malware domains across the entire network.
+
+      - Blocks ~30% of DNS requests on average
+      - Custom block/allow lists
+      - Per-client statistics
+    category: Network
+    icon: adguard-home
+    status: operating
+
+  - id: n8n
+    name: n8n
+    url: https://n8n.home.lab
+    description: Workflow automation platform
+    summary: |
+      ## n8n
+
+      Low-code automation platform with 400+ integrations. Used for automating repetitive tasks and connecting services.
+
+      > Self-hosted alternative to Zapier / Make.
+    category: Automation
+    icon: n8n
+    status: operating
+
+  - id: grafana
+    name: Grafana
+    url: http://192.168.1.10:3001
+    description: Metrics and monitoring dashboards
+    summary: |
+      ## Grafana
+
+      Visualization and analytics platform connected to Prometheus for monitoring Proxmox nodes, containers, and services.
+
+      - Node CPU / RAM / disk metrics
+      - Container health panels
+      - Alert rules configured for disk > 85%
+    category: Monitoring
+    icon: grafana
+    status: operating
+
+  - id: portainer
+    name: Portainer
+    url: http://192.168.1.10:9443
+    description: Docker container management UI
+    summary: |
+      ## Portainer
+
+      Web UI for managing Docker environments across multiple nodes.
+    category: Infrastructure
+    icon: portainer
+    status: operating
+
+  - id: old-api
+    name: Legacy API v1
+    url: http://192.168.1.50:8080
+    description: Old REST API — being phased out
+    summary: |
+      ## Legacy API v1
+
+      Original backend API. Being replaced by v2. Do not build new integrations against this endpoint.
+
+      **Planned shutdown:** Q3 2025
+    category: Dev
+    icon: ""
+    status: deprecating
+
+  - id: homelab-dashboard
+    name: Homelab Dashboard
+    url: http://192.168.1.10:3000
+    description: This dashboard
+    summary: |
+      ## Homelab Dashboard
+
+      A catalog of all services running in this Proxmox cluster. Edit via the Admin panel or directly in `config/services.yaml`.
+    category: Infrastructure
+    icon: ""
+    status: in-development
