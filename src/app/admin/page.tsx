@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Service } from "@/lib/config";
 import AdminTable from "@/components/AdminTable";
 import ServiceForm from "@/components/ServiceForm";
+import YamlEditor from "@/components/YamlEditor";
 import ThemeChanger from "@/components/ThemeChanger";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,7 @@ export default function AdminPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState<Service | null>(null);
   const [deleting, setDeleting] = useState<Service | null>(null);
+  const [yamlEditorOpen, setYamlEditorOpen] = useState(false);
 
   const refresh = useCallback(() => {
     fetch("/api/services")
@@ -76,6 +78,15 @@ export default function AdminPage() {
           </div>
           <div className="flex items-center gap-3">
             <button
+              onClick={() => setYamlEditorOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface-3)] transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+              Edit YAML
+            </button>
+            <button
               onClick={openAdd}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[var(--color-accent)] hover:opacity-90 transition-opacity"
             >
@@ -103,6 +114,11 @@ export default function AdminPage() {
           <AdminTable services={services} onEdit={openEdit} onDelete={setDeleting} />
         )}
       </main>
+
+      {/* YAML editor */}
+      {yamlEditorOpen && (
+        <YamlEditor onClose={() => setYamlEditorOpen(false)} onSaved={refresh} />
+      )}
 
       {/* Add/Edit form */}
       {formOpen && (
