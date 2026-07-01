@@ -13,8 +13,9 @@ export async function PUT(
       return NextResponse.json({ error: "Service not found" }, { status: 404 });
     }
     return NextResponse.json(updated);
-  } catch {
-    return NextResponse.json({ error: "Failed to update service" }, { status: 500 });
+  } catch (err) {
+    console.error("[PUT /api/services/:id]", err);
+    return NextResponse.json({ error: "Failed to update service", detail: String(err) }, { status: 500 });
   }
 }
 
@@ -29,7 +30,8 @@ export async function DELETE(
       return NextResponse.json({ error: "Service not found" }, { status: 404 });
     }
     return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json({ error: "Failed to delete service" }, { status: 500 });
+  } catch (err) {
+    console.error("[DELETE /api/services/:id]", err);
+    return NextResponse.json({ error: "Failed to delete service", detail: String(err) }, { status: 500 });
   }
 }

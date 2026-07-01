@@ -5,15 +5,16 @@ export async function GET() {
   try {
     const services = getServices();
     return NextResponse.json(services);
-  } catch {
-    return NextResponse.json({ error: "Failed to read config" }, { status: 500 });
+  } catch (err) {
+    console.error("[GET /api/services]", err);
+    return NextResponse.json({ error: "Failed to read config", detail: String(err) }, { status: 500 });
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, url, description, summary, category, icon, status } = body;
+    const { name, url, local_url, description, summary, category, icon, status } = body;
 
     if (!name || !url || !category) {
       return NextResponse.json(
@@ -25,6 +26,7 @@ export async function POST(req: NextRequest) {
     const service = addService({
       name,
       url,
+      local_url: local_url ?? "",
       description: description ?? "",
       summary: summary ?? "",
       category,
@@ -33,7 +35,8 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(service, { status: 201 });
-  } catch {
-    return NextResponse.json({ error: "Failed to save service" }, { status: 500 });
+  } catch (err) {
+    console.error("[POST /api/services]", err);
+    return NextResponse.json({ error: "Failed to save service", detail: String(err) }, { status: 500 });
   }
 }

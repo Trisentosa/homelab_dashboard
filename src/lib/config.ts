@@ -54,7 +54,9 @@ export function readConfig(): Config {
 function writeConfig(config: Config): void {
   const dir = path.dirname(CONFIG_PATH);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(CONFIG_PATH, yaml.dump(config, { lineWidth: -1 }), "utf8");
+  const out = yaml.dump(config, { lineWidth: -1 });
+  fs.writeFileSync(CONFIG_PATH, out, "utf8");
+  console.log("[config] wrote", CONFIG_PATH, `(${out.length} bytes)`);
 }
 
 export function getServices(): Service[] {
